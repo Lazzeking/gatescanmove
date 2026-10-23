@@ -56,11 +56,15 @@
         </Reference>
 	</ItemGroup>
 
+	<!-- Release zips the mod into bin/Release, the ReleaseToMods configurations zip it straight into the game's Mods folder -->
 	<PropertyGroup>
 		<PackToMods Condition="'$(Configuration)' == 'ReleaseToMods' Or '$(Configuration)' == 'ReleaseToModsWithExample'">true</PackToMods>
+		<PackMod Condition="'$(Configuration)' == 'Release' Or '$(PackToMods)' == 'true'">true</PackMod>
+		<PackDir Condition="'$(PackToMods)' == 'true'">$(VINTAGE_STORY_DATA)/Mods</PackDir>
+		<PackDir Condition="'$(PackToMods)' != 'true'">$(MSBuildProjectDirectory)/bin/$(Configuration)</PackDir>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(PackToMods)' == 'true'">
+	<ItemGroup Condition="'$(PackMod)' == 'true'">
 		<None Include="*ICENSE" CopyToOutputDirectory="PreserveNewest" />
 		<None Include="modicon.png" CopyToOutputDirectory="PreserveNewest" />
 		<None Include="resources/**">
@@ -86,11 +90,11 @@
 		</Task>
 	</UsingTask>
 
-	<Target Name="Package" AfterTargets="PostBuildEvent" Condition="'$(PackToMods)' == 'true'">
+	<Target Name="Package" AfterTargets="PostBuildEvent" Condition="'$(PackMod)' == 'true'">
 		<ReadModVersion ModInfoPath="resources/modinfo.json">
 			<Output TaskParameter="Version" PropertyName="ModVersion" />
 		</ReadModVersion>
-		<ZipDirectory DestinationFile="$(VINTAGE_STORY_DATA)/Mods/$(TargetName)-v$(ModVersion).zip" SourceDirectory="$(TargetDir)" Overwrite="true" />
+		<ZipDirectory DestinationFile="$(PackDir)/$(TargetName)-v$(ModVersion).zip" SourceDirectory="$(TargetDir)" Overwrite="true" />
 	</Target>
 
 	<Target Name="PackageExample" AfterTargets="Package" Condition="'$(Configuration)' == 'ReleaseToModsWithExample'">
