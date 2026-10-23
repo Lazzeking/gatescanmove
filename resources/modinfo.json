@@ -1,0 +1,14 @@
+{
+    "type": "code",
+    "modid": "gatescanmove",
+    "name": "Gates Can Move",
+    "authors": [
+        "Lazzeking"
+    ],
+    "version": "0.0.1",
+    "side": "Universal",
+    "dependencies": {
+        "game": "1.22.0"
+    },
+    "description": "Adds opening and closing animations to fence gates that don't have one."
+}

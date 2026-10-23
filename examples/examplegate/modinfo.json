@@ -1,0 +1,14 @@
+{
+    "type": "content",
+    "modid": "examplegate",
+    "name": "Example Gate (Gates Can Move reference)",
+    "authors": [
+        "Lazzeking"
+    ],
+    "version": "1.0.0",
+    "side": "Universal",
+    "dependencies": {
+        "game": "1.22.0"
+    },
+    "description": "Reference for modders: a plain fence gate that Gates Can Move animates, without depending on it."
+}
