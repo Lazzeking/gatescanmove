@@ -62,6 +62,7 @@
 
 	<ItemGroup Condition="'$(PackToMods)' == 'true'">
 		<None Include="*ICENSE" CopyToOutputDirectory="PreserveNewest" />
+		<None Include="modicon.png" CopyToOutputDirectory="PreserveNewest" />
 		<None Include="resources/**">
 			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
